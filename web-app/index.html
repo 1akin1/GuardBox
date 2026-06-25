@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuardBox Web Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease;
+    }
+    .card {
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .notification-enter {
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .btn {
+      transition: all 0.2s ease;
+    }
+    .glow {
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+    }
+    .lock-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .lock-btn:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .lock-btn:hover:after {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body id="app" class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen flex flex-col transition-colors duration-300">
+  <!-- Header -->
+  <header id="header" class="bg-gray-950 bg-opacity-70 backdrop-blur-md text-white shadow-lg p-5 fixed w-full z-10">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <div class="bg-blue-500 p-2 rounded-lg">
+          <img src="guard-box.jpeg" alt="GuardBox Logo" class="w-8 h-8 rounded-md">
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight">GuardBox</h1>
+      </div>
+      <div class="flex items-center gap-6">
+        <button onclick="toggleTheme()" class="text-sm bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+          <i data-feather="sun" class="w-4 h-4"></i>
+          <span>Theme</span>
+        </button>
+        <div class="flex items-center gap-3">
+          <span id="user-label" class="text-gray-300 hidden md:block">User: user</span>
+          <div class="bg-blue-500 rounded-full p-1">
+            <img src="pp.jpeg" class="rounded-full w-8 h-8" alt="User">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto pt-24 pb-6 px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Box Status Card -->
+      <div id="boxCard" class="card bg-gray-900 bg-opacity-60 rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center hover:glow transform transition-all hover:scale-102 hover:-translate-y-1">
+        <h2 id="boxTitle" class="text-xl font-semibold mb-6 text-blue-400 flex items-center gap-2">
+          <i data-feather="activity" class="w-5 h-5"></i>
+          Box Status
+        </h2>
+        <div class="flex flex-col items-center">
+          <div class="bg-gray-800 p-6 rounded-full mb-6">
+            <i data-feather="box" class="w-16 h-16 text-green-400"></i>
+          </div>
+          <div id="boxStatus" class="text-3xl font-bold text-green-400">Empty</div>
+        </div>
+      </div>
+
+      <!-- Lock Control Card -->
+      <div id="lockCard" class="card bg-gray-900 bg-opacity-60 rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center hover:glow transform transition-all hover:scale-102 hover:-translate-y-1">
+        <h2 id="lockTitle" class="text-xl font-semibold mb-6 text-blue-400 flex items-center gap-2">
+          <i data-feather="shield" class="w-5 h-5"></i>
+          Lock Control
+        </h2>
+        <div class="flex flex-col items-center mb-6">
+          <div class="bg-gray-800 p-6 rounded-full mb-6">
+            <i id="lockIcon" data-feather="lock" class="w-16 h-16 text-red-400"></i>
+          </div>
+          <div id="lockStatus" class="text-2xl text-red-400">Locked</div>
+        </div>
+        <div class="flex gap-4 w-full max-w-xs">
+          <button onclick="unlock()" class="lock-btn bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl shadow-lg transition-all hover:shadow-green-500/50 flex-1 flex justify-center items-center gap-2">
+            <i data-feather="unlock" class="w-5 h-5"></i>
+            Unlock
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <section class="mt-8">
+      <div id="notifCard" class="card bg-gray-900 bg-opacity-60 rounded-2xl shadow-xl p-8 hover:glow transform transition-all hover:scale-102">
+        <div class="flex flex-wrap items-center justify-between mb-6 gap-2">
+          <h2 id="notifTitle" class="text-xl font-semibold text-blue-400 flex items-center gap-2">
+            <i data-feather="bell" class="w-5 h-5"></i>
+            Recent Notifications
+          </h2>
+          <button onclick="clearNotifications()" id="clearBtn" class="text-red-400 hover:text-red-600 font-semibold flex items-center gap-1">
+            <i data-feather="trash-2" class="w-4 h-4"></i>
+            Clear
+          </button>
+        </div>
+        <ul id="notifications" class="space-y-3 max-h-64 overflow-y-auto pr-2">
+          <li class="notification-item bg-gray-800 bg-opacity-70 text-white p-4 rounded-xl shadow-sm flex items-center gap-3 w-full border-l-4 border-blue-400">
+            <i data-feather="package" class="w-5 h-5 text-blue-400"></i>
+            <span class="flex-1">Package delivered.</span>
+            <span class="text-xs text-gray-400">Just now</span>
+          </li>
+          <li class="notification-item bg-gray-800 bg-opacity-70 text-white p-4 rounded-xl shadow-sm flex items-center gap-3 w-full border-l-4 border-green-400">
+            <i data-feather="unlock" class="w-5 h-5 text-green-400"></i>
+            <span class="flex-1">Unlocked.</span>
+            <span class="text-xs text-gray-400">5m ago</span>
+          </li>
+          <li class="notification-item bg-gray-800 bg-opacity-70 text-white p-4 rounded-xl shadow-sm flex items-center gap-3 w-full border-l-4 border-red-400">
+            <i data-feather="alert-circle" class="w-5 h-5 text-red-400"></i>
+            <span class="flex-1">Vibration detected!</span>
+            <span class="text-xs text-gray-400">15m ago</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 bg-opacity-70 text-gray-400 text-center py-4 text-sm">
+    <div class="container mx-auto">
+      GuardBox Security Dashboard &copy; 2025
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    feather.replace();
+
+    function unlock() {
+      document.getElementById('lockStatus').innerText = 'Unlocked';
+      document.getElementById('lockStatus').classList.remove('text-red-400');
+      document.getElementById('lockStatus').classList.add('text-green-400');
+      const lockIcon = document.getElementById('lockIcon');
+      lockIcon.setAttribute('data-feather', 'unlock');
+      feather.replace();
+      addNotification('Unlocked.', 'unlock', 'text-green-400', 'border-green-400');
+    }
+
+    function lock() {
+      document.getElementById('lockStatus').innerText = 'Locked';
+      document.getElementById('lockStatus').classList.remove('text-green-400');
+      document.getElementById('lockStatus').classList.add('text-red-400');
+      const lockIcon = document.getElementById('lockIcon');
+      lockIcon.setAttribute('data-feather', 'lock');
+      feather.replace();
+      addNotification('Locked.', 'lock', 'text-red-400', 'border-red-400');
+    }
+
+    function addNotification(message, icon = 'bell', color = 'text-blue-400', borderColor = 'border-blue-400') {
+      const notifications = document.getElementById('notifications');
+      const li = document.createElement('li');
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const bgColor = isDark ? 'bg-gray-800 bg-opacity-70' : 'bg-gray-200 bg-opacity-70';
+      const textColor = isDark ? 'text-white' : 'text-black';
+      const timeText = 'Just now';
+      li.className = `notification-item ${bgColor} ${textColor} p-4 rounded-xl shadow-sm flex items-center gap-3 w-full notification-enter border-l-4 ${borderColor}`;
+      li.innerHTML = `<i data-feather="${icon}" class="w-5 h-5 ${color}"></i> <span class="flex-1">${message}</span> <span class="text-xs text-gray-400">${timeText}</span>`;
+      notifications.prepend(li);
+      feather.replace();
+    }
+
+    function clearNotifications() {
+      document.getElementById('notifications').innerHTML = '';
+    }
+
+    function applyNotificationTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.querySelectorAll('.notification-item').forEach(el => {
+        el.classList.remove('bg-gray-800', 'bg-gray-200', 'text-white', 'text-black', 'bg-opacity-70');
+        if (isDark) {
+          el.classList.add('bg-gray-800', 'bg-opacity-70', 'text-white');
+        } else {
+          el.classList.add('bg-gray-200', 'bg-opacity-70', 'text-black');
+        }
+      });
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const body = document.getElementById('app');
+      const isDark = html.getAttribute('data-theme') === 'dark';
+
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      body.className = isDark
+        ? 'bg-gradient-to-br from-blue-100 via-blue-50 to-white text-black min-h-screen flex flex-col transition-colors duration-300'
+        : 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen flex flex-col transition-colors duration-300';
+
+      document.getElementById('header').className = isDark
+        ? 'bg-white bg-opacity-70 backdrop-blur-md text-black shadow-lg p-5 fixed w-full z-10'
+        : 'bg-gray-950 bg-opacity-70 backdrop-blur-md text-white shadow-lg p-5 fixed w-full z-10';
+
+      document.getElementById('user-label').className = isDark ? 'text-gray-600 hidden md:block' : 'text-gray-300 hidden md:block';
+
+      const cardClass = isDark
+        ? 'card bg-white bg-opacity-60 rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center hover:glow transform transition-all hover:scale-102 hover:-translate-y-1'
+        : 'card bg-gray-900 bg-opacity-60 rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center hover:glow transform transition-all hover:scale-102 hover:-translate-y-1';
+
+      document.getElementById('boxCard').className = cardClass;
+      document.getElementById('lockCard').className = cardClass;
+
+      const notifCardClass = isDark
+        ? 'card bg-white bg-opacity-60 rounded-2xl shadow-xl p-8 hover:glow transform transition-all hover:scale-102'
+        : 'card bg-gray-900 bg-opacity-60 rounded-2xl shadow-xl p-8 hover:glow transform transition-all hover:scale-102';
+
+      document.getElementById('notifCard').className = notifCardClass;
+
+      const titleClass = isDark
+        ? 'text-xl font-semibold mb-6 text-blue-600 flex items-center gap-2'
+        : 'text-xl font-semibold mb-6 text-blue-400 flex items-center gap-2';
+      document.getElementById('boxTitle').className = titleClass;
+      document.getElementById('lockTitle').className = titleClass;
+      document.getElementById('notifTitle').className = titleClass;
+
+      document.getElementById('clearBtn').className = isDark
+        ? 'text-red-600 hover:text-red-800 font-semibold flex items-center gap-1'
+        : 'text-red-400 hover:text-red-600 font-semibold flex items-center gap-1';
+
+      document.querySelector('footer').className = isDark
+        ? 'bg-white bg-opacity-70 text-gray-600 text-center py-4 text-sm'
+        : 'bg-gray-950 bg-opacity-70 text-gray-400 text-center py-4 text-sm';
+
+      applyNotificationTheme();
+    }
+
+    window.onload = applyNotificationTheme;
+  </script>
+</body>
+</html>

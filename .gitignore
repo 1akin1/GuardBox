@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.swp
+.ipynb_checkpoints/
+venv/
+.venv/
+env/
+
+# Secrets / config
+.env
+*firebase*config*.json
+serviceAccountKey.json
+google-services.json
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Android
+*.apk
+*.aab
+.gradle/
+local.properties
+
+# OS
+.DS_Store
+Thumbs.db

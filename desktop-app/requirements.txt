@@ -1,0 +1,7 @@
+kivy
+kivymd
+plyer
+pyrebase4
+torch
+numpy
+nltk

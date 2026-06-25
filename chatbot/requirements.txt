@@ -1,0 +1,7 @@
+torch
+numpy
+nltk
+pyrebase4
+SpeechRecognition
+pyttsx3
+openai

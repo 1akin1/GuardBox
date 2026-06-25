@@ -1,0 +1,165 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "Hey",
+        "Good morning",
+        "Good afternoon",
+        "Good evening",
+        "Is anyone there?",
+        "Anybody home?",
+        "What's up?",
+        "How are you?"
+      ],
+      "responses": [
+        "Hello! How can I assist you with your GuardBox today?",
+        "Hi there! Do you need help checking your smart delivery box?",
+        "Hey! I'm here to help you with GuardBox. What do you need?",
+        "Greetings! Ready to check your box status or something else?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "See you later",
+        "Goodbye",
+        "Catch you later",
+        "Talk to you soon",
+        "See ya"
+      ],
+      "responses": [
+        "Goodbye! Stay safe and secure.",
+        "See you soon! Feel free to come back anytime for a box check.",
+        "Bye! GuardBox will keep things protected in the meantime.",
+        "Take care! I'm always here if you need assistance."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "Much appreciated",
+        "Thanks a lot",
+        "I appreciate it",
+        "That was helpful"
+      ],
+      "responses": [
+        "You're welcome! Happy to help anytime.",
+        "Glad I could assist! Let me know if you need anything else.",
+        "No problem! Your GuardBox is always under watch.",
+        "Anytime! Just ask if you want to check the box again."
+      ]
+    },
+    {
+      "tag": "box_status",
+      "patterns": [
+        "What is the box status?",
+        "Is the box locked?",
+        "Box state?",
+        "Is the GuardBox secured?",
+        "Current lock status?",
+        "Is the box secure?",
+        "Check lock",
+        "Locked or unlocked?",
+        "Locked?",
+        "Unlocked?",
+        "Is it locked?"
+      ],
+      "responses": [
+        "Let me check the current lock status of your GuardBox...",
+        "Checking if the box is currently locked or unlocked...",
+        "Please hold on, I'm retrieving the lock status now...",
+        "I'll get the latest lock state of the box for you..."
+      ]
+    },
+    
+    {
+      "tag": "check_weight",
+      "patterns": [
+        "How much does the package weigh?",
+        "Check weight",
+        "What is the weight of the box?",
+        "Get weight reading",
+        "Package weight?",
+        "Can you tell me the weight?",
+        "How heavy is the package?",
+        "Weight?",
+        "kg"
+      ],
+      "responses": [
+        "Fetching the current weight of the package...",
+        "Retrieving package weight data...",
+        "Let me get the exact weight reading for you...",
+        "Checking weight sensor for current reading..."
+      ]
+    },
+    {
+      "tag": "check_vibration",
+      "patterns": [
+        "Has there been any vibration?",
+        "Did someone shake the box?",
+        "Vibration alert?",
+        "Was there movement?",
+        "Has the box been disturbed?",
+        "Was there an impact?",
+        "Check vibration sensor",
+        "Theft attempt?",
+        "Security breach?",
+        "Any shaking?",
+        "Check for suspicious activity",
+        "Vibration?",
+        "Shaking?"
+      ],
+      "responses": [
+        "Checking for recent vibration or tampering...",
+        "Scanning logs for any suspicious movement or shake...",
+        "Let me verify if the box experienced any vibration...",
+        "Checking if a theft attempt or impact was detected..."
+      ]
+    },
+    {
+      "tag": "vibration_count",
+      "patterns": ["how many times was the box shaken", "vibration count", "was there any vibration"],
+      "responses": ["The box was shaken {vibrations} times."]
+    },
+    {
+      "tag": "lock_count",
+      "patterns": ["how many times was it locked", "lock stats"],
+      "responses": ["The box has been locked {locked} times."]
+    },
+    {
+      "tag": "delivery_count",
+      "patterns": ["how many deliveries", "delivery count", "number of deliveries"],
+      "responses": ["There have been {deliveries} deliveries."]
+    },
+    {
+      "tag": "check_package",
+      "patterns": [
+        "Is there a package?",
+        "Any package in the box?",
+        "Check if the box is empty",
+        "Is the box full?",
+        "Is the box empty?",
+        "Package detection",
+        "Is something delivered?",
+        "Anything in GuardBox?",
+        "Look for packages",
+        "Scan for package",
+        "Package?",
+        "Empty?",
+        "Full?"
+      ],
+      "responses": [
+        "Let me check the box for any packages...",
+        "Verifying the presence of any delivery...",
+        "Hold on, scanning the box for contents...",
+        "Looking inside GuardBox to detect any package..."
+      ]
+    }
+  ]
+}
