@@ -283,8 +283,6 @@ python -m http.server 8000
 **Requirements:** Android Studio, JDK, an Android device/emulator.
 
 `mobile-app/MainActivity.kt` is the main activity. Drop it into an Android Studio project (MVVM + Firebase) with the usual supporting classes, resources and your `google-services.json`, then build and run.
-
----
 <img width="322" height="642" alt="mobile " src="https://github.com/user-attachments/assets/dc497042-8f95-4155-863f-c187d0a66a49" />
 
 ## ⚙️ Configuration
