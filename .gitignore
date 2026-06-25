@@ -1,3 +1,10 @@
+# Secrets / config
+.env
+secrets.h
+*firebase*config*.json
+serviceAccountKey.json
+google-services.json
+
 # Python
 __pycache__/
 *.py[cod]
@@ -6,12 +13,7 @@ __pycache__/
 venv/
 .venv/
 env/
-
-# Secrets / config
-.env
-*firebase*config*.json
-serviceAccountKey.json
-google-services.json
+preprocessed_data.pth
 
 # Build artifacts
 build/

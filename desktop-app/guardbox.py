@@ -12,28 +12,22 @@ from kivy.clock import Clock
 from kivy.core.window import Window
 from plyer import notification
 from kivy.uix.scrollview import ScrollView
-from chatbot import get_response
-from nltk_utils import tokenize, stem, bag_of_words
+import os
+import sys
 import threading
-import pyrebase
 import time
 
-# Window size 
+# Make the sibling `chatbot` package importable, then reuse its model + Firebase.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "chatbot"))
+from chatbot import get_response  # noqa: E402  (import-safe: loads model only)
+from firebase_config import get_db  # noqa: E402
+
+# Window size
 Window.size = (1000, 600)
 
-# Firebase Config 
-firebase_config = {
-  "apiKey": "YOUR_FIREBASE_API_KEY",
-  "authDomain": "guardbox-7f898.firebaseapp.com",
-  "databaseURL": "https://guardbox-7f898-default-rtdb.europe-west1.firebasedatabase.app",
-  "projectId": "guardbox-7f898",
-  "storageBucket": "guardbox-7f898.firebasestorage.app",
-  "messagingSenderId": "YOUR_SENDER_ID",
-  "appId": "YOUR_FIREBASE_APP_ID"
-}
-
-firebase = pyrebase.initialize_app(firebase_config)
-db = firebase.database()
+# Shared Firebase handle (credentials come from environment variables;
+# see chatbot/firebase_config.py and .env.example).
+db = get_db()
 WEIGHT_THRESHOLD = 1000  # threshold
 
 class TopBar(MDBoxLayout):
@@ -496,47 +490,9 @@ class MainScreen(MDBoxLayout):
     def send_chat_message(self, *args):
         user_message = self.chat_input.text
         if user_message.strip():
-            response = get_response(user_message)  # Make sure get_response() is imported
+            response = get_response(user_message)  # imported from chatbot.py
             self.chat_dialog.title = f"GuardBox Chatbot\n\nBot: {response}"
             self.chat_input.text = ""
-
-def get_response(msg):
-    sentence = tokenize(msg)
-    X = bag_of_words(sentence, all_words)
-    X = torch.from_numpy(X).unsqueeze(0)
-
-    output = model(X)
-    _, predicted = torch.max(output, dim=1)
-    tag = tags[predicted.item()]
-
-    probs = torch.softmax(output, dim=1)
-    confidence = probs[0][predicted.item()]
-
-    if confidence.item() > 0.6:
-        # Real-time Firebase integration for certain tags
-        if tag == "check_weight":
-            weight = db.child("guardbox").child("weight").get().val()
-            return f"Current weight: {weight:.2f}g" if weight else "No weight data."
-
-        elif tag == "box_status":
-            locked = db.child("guardbox").child("locked").get().val()
-            return "The box is locked." if locked else "The box is unlocked."
-
-        elif tag == "check_package":
-            weight = db.child("guardbox").child("weight").get().val()
-            return "Yes, there's a package." if weight and weight > 100 else "No, it's empty."
-
-        elif tag == "check_vibration":
-            vibration = db.child("guardbox").child("vibration").get().val()
-            return "Yes, vibration detected." if vibration else "No vibration detected."
-
-        # Fallback to predefined response
-        for intent in intents["intents"]:
-            if tag == intent["tag"]:
-                return random.choice(intent["responses"])
-
-    return "I'm not sure I understand. Can you try again?"
-
 
 
 class GuardBoxApp(MDApp):

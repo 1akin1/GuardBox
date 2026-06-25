@@ -2,6 +2,7 @@ torch
 numpy
 nltk
 pyrebase4
+python-dotenv
 SpeechRecognition
 pyttsx3
 openai

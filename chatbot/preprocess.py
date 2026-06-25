@@ -67,5 +67,5 @@ data = {
     "tags": tags
 }
 
-torch.save(data, "C:/Users/Zihni/Desktop/Chatbot")
+torch.save(data, "preprocessed_data.pth")
 print("Training data saved to data.pth")

@@ -2,6 +2,7 @@ kivy
 kivymd
 plyer
 pyrebase4
+python-dotenv
 torch
 numpy
 nltk
