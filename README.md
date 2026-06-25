@@ -286,6 +286,7 @@ python -m http.server 8000
 
 ---
 <img width="322" height="642" alt="mobile " src="https://github.com/user-attachments/assets/dc497042-8f95-4155-863f-c187d0a66a49" />
+
 ## ⚙️ Configuration
 
 All Python credentials are read from environment variables. Copy the template and fill it in:
