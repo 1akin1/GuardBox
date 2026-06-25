@@ -7,6 +7,7 @@ GuardBox is an IoT smart delivery box that protects packages during the vulnerab
 ![Apps](https://img.shields.io/badge/Apps-Android%20%7C%20Web%20%7C%20Desktop-blue)
 ![Chatbot](https://img.shields.io/badge/Chatbot-PyTorch%20%2B%20NLTK-EE4C2C?logo=pytorch&logoColor=white)
 ![Cloud](https://img.shields.io/badge/Cloud-Firebase%20RTDB-FFCA28?logo=firebase&logoColor=black)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 > Academic project — *Special Topics in Computer Engineering (CEN 309)*, Maltepe University, Faculty of Engineering and Natural Sciences.
 
@@ -336,4 +337,4 @@ Maltepe University — Faculty of Engineering and Natural Sciences.
 
 ## 📄 License
 
-No license file is included yet. Add one (e.g. MIT) if you intend to make this project open source.
+Released under the MIT License. See the [`LICENSE`](LICENSE) file for details.
