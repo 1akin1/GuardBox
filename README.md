@@ -135,9 +135,9 @@ GuardBox/
 │   ├── *.png                    # UI icons (box / locked / unlocked / alert, light + dark)
 │   └── requirements.txt
 ├── web-app/
-│   └── index.html               # Browser dashboard (Tailwind + Feather Icons)
+│   └── index.html               # Browser dashboard (Tailwind + Feather Icons) — UI only, see note
 └── mobile-app/
-    └── MainActivity.kt          # Android main activity (Kotlin / MVVM)
+    └── MainActivity.kt          # Android main activity — single file only, see note
 ```
 
 > **Chatbot ↔ desktop integration:** the desktop app (`desktop-app/guardbox.py`) adds the
@@ -267,13 +267,30 @@ python -m http.server 8000
 # visit http://localhost:8000
 ```
 
-Plug your Firebase config into the page's script to enable live data (Tailwind + Feather Icons load from CDN).
+> **⚠️ Status — partial.** `index.html` is the dashboard UI as published in the project report,
+> but two things are missing:
+> 1. **No Firebase wiring yet** — the buttons currently only update the UI locally; they do not
+>    read from or write to the Realtime Database. Add a Firebase Web SDK script and connect the
+>    UI actions to the `guardbox` node to enable live data.
+> 2. **Missing image assets** — the page references `guard-box.jpeg` (logo) and `pp.jpeg` (avatar),
+>    which are not included. Add your own images or update the `src` paths.
 
 ### 5. Android App
 
 **Requirements:** Android Studio, JDK, an Android device/emulator.
 
-`mobile-app/MainActivity.kt` is the main activity. To build a full app, place it in an Android Studio project with the supporting `LoginActivity`, `HistoryActivity`, `SettingsActivity`, the model classes (`User`, `GuardBoxStatus`, `ActivityLog`), the `FirebaseHelper` utility, adapters, layouts, and your Firebase `google-services.json`. Then sync Gradle, build and run.
+> **⚠️ Status — incomplete (single file only).** `mobile-app/MainActivity.kt` is the main activity
+> as published in the project report. It does **not** compile on its own because the full Android
+> Studio project was not available. The following supporting files are referenced by the code but
+> not included in this repository:
+> - Activities: `LoginActivity`, `HistoryActivity`, `SettingsActivity`
+> - Model classes: `User`, `GuardBoxStatus`, `ActivityLog`
+> - Utilities / adapters: `FirebaseHelper`, `ActivityLogAdapter`
+> - Resources: layouts (`activity_main.xml`, `dialog_add_device.xml`, …), `colors.xml`,
+>   `AndroidManifest.xml`, Gradle build files, and a Firebase `google-services.json`
+>
+> To build a working app, recreate these inside an Android Studio project (MVVM + Firebase),
+> add your `google-services.json`, then sync Gradle, build and run.
 
 ---
 
