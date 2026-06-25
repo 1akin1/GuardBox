@@ -9,8 +9,6 @@ GuardBox is an IoT smart delivery box that protects packages during the vulnerab
 ![Cloud](https://img.shields.io/badge/Cloud-Firebase%20RTDB-FFCA28?logo=firebase&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-> Academic project — *Special Topics in Computer Engineering (CEN 309)*, Maltepe University, Faculty of Engineering and Natural Sciences.
-
 ---
 
 ## 🚨 Security Notice (read this first)
@@ -327,9 +325,9 @@ WIFI_PASSWORD=your_wifi_password
 
 Maltepe University — Faculty of Engineering and Natural Sciences.
 
+- Zihni AKIN
 - Enes İŞBİLEN
 - Arda ŞİMŞEK
-- Zihni AKIN
 - Furkan AKSOY
 - Can ÖZEL
 
