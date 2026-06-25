@@ -1,3 +1,4 @@
+<img width="1706" height="1391" alt="flowchart2" src="https://github.com/user-attachments/assets/3c4606fc-4dd9-42f8-b135-ff2ff0cff03f" />
 # 📦 GuardBox — Secure, Smart & Convenient Package Delivery
 
 GuardBox is an IoT smart delivery box that protects packages during the vulnerable window between drop-off and pickup. It combines a physical secure enclosure with electronic monitoring, automatic locking, RFID/remote authentication, and real-time alerts. A built-in **AI chatbot** lets you query the box's live status by voice or text.
@@ -10,6 +11,8 @@ GuardBox is an IoT smart delivery box that protects packages during the vulnerab
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
+<img width="600" height="800" alt="1747146211644" src="https://github.com/user-attachments/assets/cae55c41-3567-4ead-8705-b7911d757bda" />
+<img width="600" height="800" alt="1747145874546" src="https://github.com/user-attachments/assets/d813bc3a-99f0-455e-ac13-c12d7196f69d" />
 
 ## 🚨 Security Notice (read this first)
 
@@ -93,6 +96,9 @@ Three logical layers:
 3. **Connectivity layer** — Firebase for real-time sync, notifications, and remote commands.
 
 ---
+
+## Flowchart
+<img width="1706" height="1391" alt="flowchart2" src="https://github.com/user-attachments/assets/fd082a77-cdc9-467a-a1aa-83fb0ddbda63" />
 
 ## 🧰 Tech Stack
 
@@ -252,6 +258,7 @@ cd desktop-app
 pip install -r requirements.txt
 python guardbox.py   # run from this folder so the icons load
 ```
+<img width="987" height="622" alt="app2" src="https://github.com/user-attachments/assets/39e7d110-7fb2-418f-a027-6bc2bf07ca5e" />
 
 The desktop app shows box status, lock control, and a notifications panel, and includes a **Chatbot** button. It imports `get_response` from the sibling `chatbot/` folder, so keep both folders in place.
 
@@ -260,15 +267,17 @@ The desktop app shows box status, lock control, and a notifications panel, and i
 No build step required.
 
 ```bash
+
 cd web-app
 # open index.html directly, or serve it:
 python -m http.server 8000
 # visit http://localhost:8000
 ```
 
-> **Note:** the web and mobile apps are the versions from the project report and have minor gaps
+> **Note:** the web and mobile apps have minor gaps
 > (e.g. live Firebase wiring on the web side, and the full Android Studio project around
 > `MainActivity.kt`). They are functional starting points and open to further development.
+<img width="1280" height="731" alt="1747142366207" src="https://github.com/user-attachments/assets/fe53d33b-5676-45d7-9852-91fa78640ec3" />
 
 ### 5. Android App
 
@@ -277,7 +286,7 @@ python -m http.server 8000
 `mobile-app/MainActivity.kt` is the main activity. Drop it into an Android Studio project (MVVM + Firebase) with the usual supporting classes, resources and your `google-services.json`, then build and run.
 
 ---
-
+<img width="322" height="642" alt="mobile " src="https://github.com/user-attachments/assets/dc497042-8f95-4155-863f-c187d0a66a49" />
 ## ⚙️ Configuration
 
 All Python credentials are read from environment variables. Copy the template and fill it in:
