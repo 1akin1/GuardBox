@@ -1,4 +1,3 @@
-<img width="1706" height="1391" alt="flowchart2" src="https://github.com/user-attachments/assets/3c4606fc-4dd9-42f8-b135-ff2ff0cff03f" />
 # 📦 GuardBox — Secure, Smart & Convenient Package Delivery
 
 GuardBox is an IoT smart delivery box that protects packages during the vulnerable window between drop-off and pickup. It combines a physical secure enclosure with electronic monitoring, automatic locking, RFID/remote authentication, and real-time alerts. A built-in **AI chatbot** lets you query the box's live status by voice or text.
