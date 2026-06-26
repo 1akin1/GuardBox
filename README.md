@@ -76,7 +76,7 @@ Status is mirrored across an Android app, a web dashboard, and a desktop app —
 ## 🏗 System Architecture
 
 ```
-                         ┌─────────────────────────────┐
+                         ┌──────────────────────────────┐
                          │    Firebase Realtime DB      │
                          │  /guardbox  /guardbox_stats  │
                          └────────────┬─────────────────┘
@@ -99,7 +99,7 @@ Three logical layers:
 ---
 
 ## Flowchart
-<img width="1706" height="1391" alt="flowchart2" src="https://github.com/user-attachments/assets/fd082a77-cdc9-467a-a1aa-83fb0ddbda63" />
+<img width="1177" height="865" alt="Screenshot 2026-06-26 223002" src="https://github.com/user-attachments/assets/3646ba9d-05d4-47f8-ba42-0dbb33071507" />
 
 ## 🧰 Tech Stack
 
