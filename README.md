@@ -10,8 +10,10 @@ GuardBox is an IoT smart delivery box that protects packages during the vulnerab
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
-<img width="600" height="800" alt="1747146211644" src="https://github.com/user-attachments/assets/cae55c41-3567-4ead-8705-b7911d757bda" />
-<img width="600" height="800" alt="1747145874546" src="https://github.com/user-attachments/assets/d813bc3a-99f0-455e-ac13-c12d7196f69d" />
+<p align="center">
+  <img width="600" height="800" alt="1747146211644" src="https://github.com/user-attachments/assets/cae55c41-3567-4ead-8705-b7911d757bda" />
+  <img width="600" height="800" alt="1747145874546" src="https://github.com/user-attachments/assets/d813bc3a-99f0-455e-ac13-c12d7196f69d" />
+</p>
 
 ## 🚨 Security Notice (read this first)
 
